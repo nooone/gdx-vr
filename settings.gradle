@@ -1,0 +1,1 @@
+include 'gdx-vr', 'gdx-vr-oculus', 'gdx-vr-android', 'gdx-vr-ios', 'tests'
