@@ -30,6 +30,54 @@ public class Head {
 
 	private Quaternion orientation;
 
+	public float getInterpupillaryDistance() {
+		return interpupillaryDistance;
+	}
+
+	public void setInterpupillaryDistance(float interpupillaryDistance) {
+		this.interpupillaryDistance = interpupillaryDistance;
+	}
+
+	public float getEyeHeight() {
+		return eyeHeight;
+	}
+
+	public void setEyeHeight(float eyeHeight) {
+		this.eyeHeight = eyeHeight;
+	}
+
+	public Vector3 getPosition() {
+		return position;
+	}
+
+	public void setPosition(Vector3 position) {
+		this.position = position;
+	}
+
+	public Quaternion getOrientation() {
+		return orientation;
+	}
+
+	public void setOrientation(Quaternion orientation) {
+		this.orientation = orientation;
+	}
+
+	public Viewport getLeftEye() {
+		return leftEye;
+	}
+
+	public void setLeftEye(Viewport leftEye) {
+		this.leftEye = leftEye;
+	}
+
+	public Viewport getRightEye() {
+		return rightEye;
+	}
+
+	public void setRightEye(Viewport rightEye) {
+		this.rightEye = rightEye;
+	}
+
 	private Viewport leftEye;
 
 	private Viewport rightEye;

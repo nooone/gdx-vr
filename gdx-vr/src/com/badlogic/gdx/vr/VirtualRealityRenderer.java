@@ -7,10 +7,18 @@
  * ###################################### */
 package com.badlogic.gdx.vr;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.viewport.Viewport;
+
 /**
  * @author Daniel Holderbaum
  */
 public class VirtualRealityRenderer {
+
+	private Array<VirtualRealityRenderListener> listeners;
+
+	private boolean vrMode, distortionCorrected;
 
 	/**
 	 * Enables or disables VR rendering mode.
@@ -26,7 +34,7 @@ public class VirtualRealityRenderer {
 	 * details on how they are affected by VR mode.
 	 */
 	public void setVRMode(boolean enabled) {
-
+		this.vrMode = enabled;
 	}
 
 	/**
@@ -35,8 +43,30 @@ public class VirtualRealityRenderer {
 	 * Enabled by default. Changes will be effective from the first frame after
 	 * this call.
 	 */
-	public void setDistortionCorrectionEnabled(boolean enabled) {
-
+	public void setDistortionCorrection(boolean enabled) {
+		this.distortionCorrected = enabled;
 	}
-	
+
+	public void render(float deltaTime) {
+		for (VirtualRealityRenderListener listener : listeners) {
+			listener.frameStarted();
+		}
+
+		renderEye(VirtualReality.head.getLeftEye());
+		renderEye(VirtualReality.head.getRightEye());
+
+		for (VirtualRealityRenderListener listener : listeners) {
+			listener.frameEnded();
+		}
+	}
+
+	private void renderEye(Viewport eye) {
+		int screenWidth = Gdx.graphics.getWidth();
+		int screenHeight = Gdx.graphics.getHeight();
+		eye.update(screenWidth, screenHeight);
+
+		for (VirtualRealityRenderListener listener : listeners) {
+			listener.render(eye.getCamera());
+		}
+	}
 }

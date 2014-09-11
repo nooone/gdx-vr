@@ -12,12 +12,11 @@ import com.badlogic.gdx.graphics.Camera;
 /**
  * @author Daniel Holderbaum
  */
-public interface VirtualRealityCallback {
+public interface VirtualRealityRenderListener {
 
-	void deviceConnected();
-
-	void deviceDisconnected();
-
+	/**
+	 * Should be implemented to clear the screen for example.
+	 */
 	void frameStarted();
 
 	void frameEnded();

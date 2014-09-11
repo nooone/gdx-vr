@@ -14,6 +14,8 @@ public class VirtualReality {
 
 	public static HeadMountedDisplay headMountedDisplay;
 
+	public static Head head;
+
 	public static void init() {
 
 	}
