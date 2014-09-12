@@ -30,6 +30,12 @@ public class Head {
 
 	private Quaternion orientation;
 
+	private Viewport leftEye;
+
+	private Viewport rightEye;
+
+	private Viewport cyclopsEye;
+
 	public float getInterpupillaryDistance() {
 		return interpupillaryDistance;
 	}
@@ -77,10 +83,6 @@ public class Head {
 	public void setRightEye(Viewport rightEye) {
 		this.rightEye = rightEye;
 	}
-
-	private Viewport leftEye;
-
-	private Viewport rightEye;
 
 	public void resetHeadPose() {
 

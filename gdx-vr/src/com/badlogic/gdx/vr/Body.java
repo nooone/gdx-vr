@@ -7,19 +7,18 @@
  * ###################################### */
 package com.badlogic.gdx.vr;
 
+import com.badlogic.gdx.math.Quaternion;
+import com.badlogic.gdx.math.Vector3;
+
 /**
  * @author Daniel Holderbaum
  */
-public class VirtualReality {
+public class Body {
 
-	public static HeadMountedDisplay headMountedDisplay;
+	public Vector3 position;
 
-	public static Head head;
+	public Quaternion rotation;
 
-	public static Body body;
-
-	public static void init() {
-
-	}
+	public final Vector3 headOffset = new Vector3(0f, 1.61f / 2f, 0f);
 
 }

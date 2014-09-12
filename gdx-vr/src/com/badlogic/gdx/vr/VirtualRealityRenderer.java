@@ -8,6 +8,8 @@
 package com.badlogic.gdx.vr;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Pixmap.Format;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -20,7 +22,11 @@ public class VirtualRealityRenderer {
 
 	private boolean vrMode, distortionCorrected;
 
+	private FrameBuffer leftFBO, rightFBO;
+
 	/**
+	 * TODO: rename to cyclops-mode.
+	 * 
 	 * Enables or disables VR rendering mode.
 	 * 
 	 * Controls stereo rendering and distortion correction. Enabled by default.
@@ -35,6 +41,20 @@ public class VirtualRealityRenderer {
 	 */
 	public void setVRMode(boolean enabled) {
 		this.vrMode = enabled;
+
+		// if (vrMode)
+	}
+
+	private void disposeFBOs() {
+		if (leftFBO != null) {
+			leftFBO.dispose();
+			leftFBO = null;
+		}
+
+		if (rightFBO != null) {
+			rightFBO.dispose();
+			rightFBO = null;
+		}
 	}
 
 	/**
@@ -52,12 +72,22 @@ public class VirtualRealityRenderer {
 			listener.frameStarted();
 		}
 
+		// if (cyclops) {
+		//
+		// } else {
 		renderEye(VirtualReality.head.getLeftEye());
 		renderEye(VirtualReality.head.getRightEye());
+		// }
 
 		for (VirtualRealityRenderListener listener : listeners) {
 			listener.frameEnded();
 		}
+	}
+
+	public void resize(int screenWidth, int screenHeight) {
+		// TODO: set up the FBOs
+		// TODO: what happens in case the FBO size won't be PoT?
+		FrameBuffer fbo = new FrameBuffer(Format.RGBA4444, screenWidth, screenHeight, false);
 	}
 
 	private void renderEye(Viewport eye) {
