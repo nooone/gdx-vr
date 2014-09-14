@@ -16,37 +16,39 @@
 
 package com.badlogic.gdx.vr;
 
-import com.oculusvr.capi.Hmd;
+import com.oculusvr.capi.OvrLibrary;
 
 /**
  * @author Daniel Holderbaum
  */
-public class OculusDisplayMetaInformation implements DisplayMetaInformation {
+public class OculusImplementation implements VirtualRealityImplementation {
 
-	private Hmd hmd;
-
-	public OculusDisplayMetaInformation(Hmd hmd) {
-		this.hmd = hmd;
+	public OculusImplementation() {
+		VirtualReality.implementation = this;
 	}
 
 	@Override
-	public String getManufacturer() {
-		return null;
+	public void initialize() {
+		OvrLibrary.INSTANCE.ovr_Initialize();
+		VirtualReality.headMountedDisplay = new OculusHMD(OvrLibrary.INSTANCE.ovrHmd_CreateDebug(0));
 	}
 
 	@Override
-	public String getModel() {
-		return hmd.ProductName.getString(0);
+	public void shutdown() {
+		OvrLibrary.INSTANCE.ovr_Shutdown();
 	}
 
 	@Override
-	public String getVendor() {
-		return String.valueOf(hmd.VendorId);
+	public boolean supportsAntiDistortion() {
+		return true;
 	}
 
 	@Override
-	public String getVersion() {
-		return "v" + hmd.FirmwareMajor + "." + hmd.FirmwareMinor;
+	public void addDeviceListener(VirtualRealityDeviceListener listener) {
+	}
+
+	@Override
+	public void removeDeviceListener(VirtualRealityDeviceListener listener) {
 	}
 
 }

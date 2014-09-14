@@ -27,7 +27,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  */
 public class VirtualRealityRenderer {
 
-	private Array<VirtualRealityRenderListener> listeners;
+	public Array<VirtualRealityRenderListener> listeners;
 
 	private boolean vrMode, distortionCorrected;
 
@@ -76,7 +76,7 @@ public class VirtualRealityRenderer {
 		this.distortionCorrected = enabled;
 	}
 
-	public void render(float deltaTime) {
+	public void render() {
 		for (VirtualRealityRenderListener listener : listeners) {
 			listener.frameStarted();
 		}

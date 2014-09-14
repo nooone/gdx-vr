@@ -21,32 +21,37 @@ import com.google.vrtoolkit.cardboard.CardboardDeviceParams;
 /**
  * @author Daniel Holderbaum
  */
-public class CardboardHMD implements HeadMountedDisplay {
+public class CardboardOpticsInformation implements DeviceOpticsInformation {
 
 	private CardboardDeviceParams cardboardDeviceParams;
 
-	private DeviceMetaInformation displayMetaInformation;
-
-	private DeviceOpticsInformation displayOpticsInformation;
-
-	public CardboardHMD(CardboardDeviceParams cardboardDeviceParams) {
+	public CardboardOpticsInformation(CardboardDeviceParams cardboardDeviceParams) {
 		this.cardboardDeviceParams = cardboardDeviceParams;
-		this.displayMetaInformation = new CardboardMetaInformation(cardboardDeviceParams);
 	}
 
 	@Override
-	public Distortion getDistortion() {
-		return null;
+	public float getEyeToLensDistance() {
+		return cardboardDeviceParams.getEyeToLensDistance();
 	}
 
 	@Override
-	public DeviceMetaInformation getDisplayMetaInformation() {
-		return displayMetaInformation;
+	public float getInterpupillaryDistance() {
+		return cardboardDeviceParams.getInterpupillaryDistance();
 	}
 
 	@Override
-	public DeviceOpticsInformation getDisplayOpticsInformation() {
-		return displayOpticsInformation;
+	public float getLensDiameter() {
+		return cardboardDeviceParams.getLensDiameter();
+	}
+
+	@Override
+	public float getScreenToLensDistance() {
+		return cardboardDeviceParams.getScreenToLensDistance();
+	}
+
+	@Override
+	public float getVerticalDistanceToLensCenter() {
+		return cardboardDeviceParams.getVerticalDistanceToLensCenter();
 	}
 
 }

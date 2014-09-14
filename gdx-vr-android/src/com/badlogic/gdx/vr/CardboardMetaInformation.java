@@ -21,11 +21,11 @@ import com.google.vrtoolkit.cardboard.CardboardDeviceParams;
 /**
  * @author Daniel Holderbaum
  */
-public class CardboardDisplayMetaInformation implements DisplayMetaInformation {
+public class CardboardMetaInformation implements DeviceMetaInformation {
 
 	private CardboardDeviceParams cardboardDeviceParams;
 
-	public CardboardDisplayMetaInformation(CardboardDeviceParams cardboardDeviceParams) {
+	public CardboardMetaInformation(CardboardDeviceParams cardboardDeviceParams) {
 		this.cardboardDeviceParams = cardboardDeviceParams;
 	}
 

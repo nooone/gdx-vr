@@ -16,42 +16,37 @@
 
 package com.badlogic.gdx.vr;
 
-import com.oculusvr.capi.Hmd;
-
 /**
  * @author Daniel Holderbaum
  */
-public class OculusDisplayOpticsInformation implements DisplayOpticsInformation {
+public interface DeviceMetaInformation {
 
-	private Hmd hmd;
+	/**
+	 * Returns the device model string.
+	 * 
+	 * @return A string identifying the current device model.
+	 */
+	String getModel();
 
-	public OculusDisplayOpticsInformation(Hmd hmd) {
-		this.hmd = hmd;
-	}
+	/**
+	 * Returns the device vendor string.
+	 * 
+	 * @return A string identifying the device vendor.
+	 */
+	String getVendor();
 
-	@Override
-	public float getEyeToLensDistance() {
-		return 0;
-	}
+	/**
+	 * Returns the device manufacturer string.
+	 * 
+	 * @return A string identifying the device manufacturer.
+	 */
+	String getManufacturer();
 
-	@Override
-	public float getInterpupillaryDistance() {
-		return 0;
-	}
-
-	@Override
-	public float getLensDiameter() {
-		return 0;
-	}
-
-	@Override
-	public float getScreenToLensDistance() {
-		return 0;
-	}
-
-	@Override
-	public float getVerticalDistanceToLensCenter() {
-		return 0;
-	}
+	/**
+	 * Returns the device version string.
+	 * 
+	 * @return A string identifying the current device version.
+	 */
+	String getVersion();
 
 }

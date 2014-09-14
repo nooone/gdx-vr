@@ -19,34 +19,43 @@ package com.badlogic.gdx.vr;
 /**
  * @author Daniel Holderbaum
  */
-public interface DisplayMetaInformation {
+public interface DeviceOpticsInformation {
 
 	/**
-	 * Returns the device model string.
+	 * Returns the eye to lens distance in meters. The distance is measured to
+	 * the center of the lens, not its surface.
 	 * 
-	 * @return A string identifying the current device model.
+	 * @return The eye to lens distance in meters.
 	 */
-	String getModel();
+	float getEyeToLensDistance();
 
 	/**
-	 * Returns the device vendor string.
+	 * Returns the interpupillary distance for the device.
 	 * 
-	 * @return A string identifying the device vendor.
+	 * @return The interpupillary distance in meters.
 	 */
-	String getVendor();
+	float getInterpupillaryDistance();
 
 	/**
-	 * Returns the device manufacturer string.
+	 * Returns the lens diameter.
 	 * 
-	 * @return A string identifying the device manufacturer.
+	 * @return The lens diameter in meters.
 	 */
-	String getManufacturer();
+	float getLensDiameter();
 
 	/**
-	 * Returns the device version string.
+	 * Returns the screen to lens distance.
 	 * 
-	 * @return A string identifying the current device version.
+	 * @return The screen to lens distance in meters.
 	 */
-	String getVersion();
+	float getScreenToLensDistance();
+
+	/**
+	 * Returns the vertical distance to the lens center.
+	 * 
+	 * @return The vertical distance to the lens center from the bottom of the
+	 *         inserted device, measured in meters.
+	 */
+	float getVerticalDistanceToLensCenter();
 
 }

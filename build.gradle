@@ -120,6 +120,7 @@ project(":gdx-vr-simpleroom-core") {
     apply plugin: "java"
 	
     dependencies {
+    	compile project(":gdx-vr")
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
     }
 }

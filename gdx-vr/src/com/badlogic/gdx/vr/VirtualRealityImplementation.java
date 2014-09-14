@@ -16,37 +16,19 @@
 
 package com.badlogic.gdx.vr;
 
-import com.google.vrtoolkit.cardboard.CardboardDeviceParams;
-
 /**
  * @author Daniel Holderbaum
  */
-public class CardboardHMD implements HeadMountedDisplay {
+public interface VirtualRealityImplementation {
 
-	private CardboardDeviceParams cardboardDeviceParams;
+	void initialize();
 
-	private DeviceMetaInformation displayMetaInformation;
+	void shutdown();
 
-	private DeviceOpticsInformation displayOpticsInformation;
+	boolean supportsAntiDistortion();
 
-	public CardboardHMD(CardboardDeviceParams cardboardDeviceParams) {
-		this.cardboardDeviceParams = cardboardDeviceParams;
-		this.displayMetaInformation = new CardboardMetaInformation(cardboardDeviceParams);
-	}
+	void addDeviceListener(VirtualRealityDeviceListener listener);
 
-	@Override
-	public Distortion getDistortion() {
-		return null;
-	}
-
-	@Override
-	public DeviceMetaInformation getDisplayMetaInformation() {
-		return displayMetaInformation;
-	}
-
-	@Override
-	public DeviceOpticsInformation getDisplayOpticsInformation() {
-		return displayOpticsInformation;
-	}
+	void removeDeviceListener(VirtualRealityDeviceListener listener);
 
 }

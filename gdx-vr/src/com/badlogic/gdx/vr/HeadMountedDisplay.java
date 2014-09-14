@@ -44,9 +44,9 @@ public interface HeadMountedDisplay {
 	 */
 	Distortion getDistortion();
 
-	DisplayMetaInformation getDisplayMetaInformation();
+	DeviceMetaInformation getDisplayMetaInformation();
 
-	DisplayOpticsInformation getDisplayOpticsInformation();
+	DeviceOpticsInformation getDisplayOpticsInformation();
 
 	// /** Returns the NFC tag contents from there these parameters were
 	// extracted. */

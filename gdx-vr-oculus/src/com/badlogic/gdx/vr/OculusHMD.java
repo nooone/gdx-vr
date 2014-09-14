@@ -30,12 +30,12 @@ public class OculusHMD implements HeadMountedDisplay {
 	}
 
 	@Override
-	public DisplayMetaInformation getDisplayMetaInformation() {
+	public DeviceMetaInformation getDisplayMetaInformation() {
 		return null;
 	}
 
 	@Override
-	public DisplayOpticsInformation getDisplayOpticsInformation() {
+	public DeviceOpticsInformation getDisplayOpticsInformation() {
 		return null;
 	}
 

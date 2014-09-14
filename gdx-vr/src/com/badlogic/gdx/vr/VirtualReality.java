@@ -27,8 +27,22 @@ public class VirtualReality {
 
 	public static Body body;
 
-	public static void init() {
+	public static VirtualRealityRenderer renderer;
 
+	static VirtualRealityImplementation implementation;
+
+	public static void initialize() {
+		implementation.initialize();
+		head = new Head();
+		body = new Body();
+		renderer = new VirtualRealityRenderer();
+	}
+
+	public static void shutdown() {
+		implementation.shutdown();
+		head = null;
+		body = null;
+		renderer = null;
 	}
 
 }

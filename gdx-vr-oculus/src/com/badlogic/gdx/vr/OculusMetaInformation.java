@@ -16,42 +16,37 @@
 
 package com.badlogic.gdx.vr;
 
-import com.google.vrtoolkit.cardboard.CardboardDeviceParams;
+import com.oculusvr.capi.Hmd;
 
 /**
  * @author Daniel Holderbaum
  */
-public class CardboardDisplayOpticsInformation implements DisplayOpticsInformation {
+public class OculusMetaInformation implements DeviceMetaInformation {
 
-	private CardboardDeviceParams cardboardDeviceParams;
+	private Hmd hmd;
 
-	public CardboardDisplayOpticsInformation(CardboardDeviceParams cardboardDeviceParams) {
-		this.cardboardDeviceParams = cardboardDeviceParams;
+	public OculusMetaInformation(Hmd hmd) {
+		this.hmd = hmd;
 	}
 
 	@Override
-	public float getEyeToLensDistance() {
-		return cardboardDeviceParams.getEyeToLensDistance();
+	public String getManufacturer() {
+		return null;
 	}
 
 	@Override
-	public float getInterpupillaryDistance() {
-		return cardboardDeviceParams.getInterpupillaryDistance();
+	public String getModel() {
+		return hmd.ProductName.getString(0);
 	}
 
 	@Override
-	public float getLensDiameter() {
-		return cardboardDeviceParams.getLensDiameter();
+	public String getVendor() {
+		return String.valueOf(hmd.VendorId);
 	}
 
 	@Override
-	public float getScreenToLensDistance() {
-		return cardboardDeviceParams.getScreenToLensDistance();
-	}
-
-	@Override
-	public float getVerticalDistanceToLensCenter() {
-		return cardboardDeviceParams.getVerticalDistanceToLensCenter();
+	public String getVersion() {
+		return "v" + hmd.FirmwareMajor + "." + hmd.FirmwareMinor;
 	}
 
 }
