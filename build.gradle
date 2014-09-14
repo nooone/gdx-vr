@@ -3,12 +3,16 @@ buildscript {
         mavenCentral()
         mavenLocal()
     }
+	
+	dependencies {
+        classpath 'com.android.tools.build:gradle:0.10+'
+        classpath 'com.github.jtakakura:gradle-robovm-plugin:0.0.10'
+    }
 }
 
 allprojects {
     apply plugin: 'eclipse'
     apply plugin: 'idea'
-    apply plugin: 'java'
 
     repositories {
         mavenCentral()
@@ -19,8 +23,10 @@ allprojects {
 }
 
 ext {
+	appName = 'gdx-vr-simpleroom'
 	projectGroup = "gdx-vr"
 	gdxVersion = '1.3.1'
+	roboVMVersion = '0.0.14'
 }
 
 /** needed to disable Java 8 doclint which throws errors **/
@@ -31,6 +37,7 @@ allprojects {
 }
 
 project(":gdx-vr") {
+    apply plugin: 'java'
     apply from : '../publish.gradle'
 
 	dependencies {
@@ -39,6 +46,7 @@ project(":gdx-vr") {
 }
 
 project(":gdx-vr-oculus") {
+	apply plugin: 'java'
     apply from : '../publish.gradle'
 
 	dependencies {
@@ -48,6 +56,7 @@ project(":gdx-vr-oculus") {
 }
 
 project(":gdx-vr-android") {
+    apply plugin: 'java'
     apply from : '../publish.gradle'
 
 	dependencies {
@@ -57,6 +66,7 @@ project(":gdx-vr-android") {
 }
 
 project(":gdx-vr-ios") {
+    apply plugin: 'java'
     apply from : '../publish.gradle'
 
 	dependencies {
@@ -64,11 +74,53 @@ project(":gdx-vr-ios") {
     }
 }
 
-project(":tests") {
+project(":gdx-vr-simpleroom-desktop") {
+    apply plugin: "java"
+
     dependencies {
-        compile project(":gdx-vr")
+        compile project(":gdx-vr-simpleroom-core")
+		compile project(":gdx-vr-oculus")
         compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+    }
+}
+
+project(":gdx-vr-simpleroom-android") {
+    apply plugin: "android"
+	
+    configurations { natives }
+
+    dependencies {
+        compile project(":gdx-vr-simpleroom-core")
+		compile project(":gdx-vr-android")
+        compile "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
+        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi"
+        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"
+        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"
+    }
+}
+
+project(":gdx-vr-simpleroom-ios") {
+    apply plugin: "java"
+    apply plugin: "robovm"
+	
+    configurations { natives }
+
+    dependencies {
+        compile project(":gdx-vr-simpleroom-core")
+		compile project(":gdx-vr-ios")
+        compile "org.robovm:robovm-rt:${roboVMVersion}"
+        compile "org.robovm:robovm-cocoatouch:${roboVMVersion}"
+        compile "com.badlogicgames.gdx:gdx-backend-robovm:$gdxVersion"
+        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-ios"
+    }
+}
+
+project(":gdx-vr-simpleroom-core") {
+    apply plugin: "java"
+	
+    dependencies {
+        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
     }
 }
 

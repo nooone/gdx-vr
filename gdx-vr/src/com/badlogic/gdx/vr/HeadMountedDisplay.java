@@ -44,67 +44,12 @@ public interface HeadMountedDisplay {
 	 */
 	Distortion getDistortion();
 
-	/**
-	 * Returns the eye to lens distance in meters. The distance is measured to
-	 * the center of the lens, not its surface.
-	 * 
-	 * @return The eye to lens distance in meters.
-	 */
-	float getEyeToLensDistance();
+	DisplayMetaInformation getDisplayMetaInformation();
 
-	/**
-	 * Returns the interpupillary distance for the device.
-	 * 
-	 * @return The interpupillary distance in meters.
-	 */
-	float getInterpupillaryDistance();
-
-	/**
-	 * Returns the lens diameter.
-	 * 
-	 * @return The lens diameter in meters.
-	 */
-	float getLensDiameter();
-
-	/**
-	 * Returns the device model string.
-	 * 
-	 * @return A string identifying the current device model.
-	 */
-	String getModel();
+	DisplayOpticsInformation getDisplayOpticsInformation();
 
 	// /** Returns the NFC tag contents from there these parameters were
 	// extracted. */
 	// NdefMessage getNfcTagContents();
-
-	/**
-	 * Returns the screen to lens distance.
-	 * 
-	 * @return The screen to lens distance in meters.
-	 */
-	float getScreenToLensDistance();
-
-	/**
-	 * Returns the device vendor string.
-	 * 
-	 * @return A string identifying the device vendor in reverse domain name
-	 *         notation.
-	 */
-	String getVendor();
-
-	/**
-	 * Returns the device version string.
-	 * 
-	 * @return A string identifying the current device version.
-	 */
-	String getVersion();
-
-	/**
-	 * Returns the vertical distance to the lens center.
-	 * 
-	 * @return The vertical distance to the lens center from the bottom of the
-	 *         inserted device, measured in meters.
-	 */
-	float getVerticalDistanceToLensCenter();
 
 }

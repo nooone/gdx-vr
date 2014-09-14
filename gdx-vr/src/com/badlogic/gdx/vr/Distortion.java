@@ -16,6 +16,8 @@
 
 package com.badlogic.gdx.vr;
 
+import com.badlogic.gdx.graphics.Mesh;
+
 /**
  * @author Daniel Holderbaum
  */
@@ -68,5 +70,7 @@ public interface Distortion {
 	 *            Barrel distortion coefficients to set.
 	 */
 	void setCoefficients(float[] coefficients);
+
+	Mesh getAntiDistortionMesh();
 
 }

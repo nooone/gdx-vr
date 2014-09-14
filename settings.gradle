@@ -1,1 +1,1 @@
-include 'gdx-vr', 'gdx-vr-oculus', 'gdx-vr-android', 'gdx-vr-ios', 'tests'
+include 'gdx-vr', 'gdx-vr-oculus', 'gdx-vr-android', 'gdx-vr-ios', 'gdx-vr-simpleroom-desktop', 'gdx-vr-simpleroom-android', 'gdx-vr-simpleroom-ios', 'gdx-vr-simpleroom-core'
