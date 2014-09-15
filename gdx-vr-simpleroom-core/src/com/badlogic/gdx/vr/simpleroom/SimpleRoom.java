@@ -14,8 +14,12 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
+import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader;
+import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader.Config;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
+import com.badlogic.gdx.graphics.g3d.utils.DefaultShaderProvider;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
+import com.badlogic.gdx.graphics.g3d.utils.ShaderProvider;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -35,10 +39,16 @@ public class SimpleRoom extends ApplicationAdapter implements VirtualRealityRend
 	@Override
 	public void create() {
 		assets = new AssetManager();
-		assets.load("BrickHouse.g3db", Model.class);
+		String model = "Bambo_House.g3db";
+		assets.load(model, Model.class);
 		assets.finishLoading();
-		modelInstance = new ModelInstance(assets.get("BrickHouse.g3db", Model.class), new Matrix4().setToScaling(0.01f, 0.01f, 0.01f));
-		modelBatch = new ModelBatch();
+		modelInstance = new ModelInstance(assets.get(model, Model.class));
+
+		DefaultShader.Config config = new Config();
+		config.defaultCullFace = GL20.GL_NONE;
+		ShaderProvider shaderProvider = new DefaultShaderProvider(config);
+		modelBatch = new ModelBatch(shaderProvider);
+
 		camera = new PerspectiveCamera();
 		cameraController = new CameraInputController(camera);
 		camera.position.set(10, 10, 10);
@@ -58,10 +68,17 @@ public class SimpleRoom extends ApplicationAdapter implements VirtualRealityRend
 
 	@Override
 	public void render() {
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+
 		cameraController.update();
 		camera.update(true);
 
 		// VirtualReality.renderer.
+		modelBatch.begin(camera);
+		modelBatch.render(ground, environment);
+		modelBatch.render(modelInstance, environment);
+		modelBatch.end();
 
 	}
 

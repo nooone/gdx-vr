@@ -23,34 +23,35 @@ import com.badlogic.gdx.graphics.Mesh;
  */
 public class CardboardDistortion implements Distortion {
 
+	private com.google.vrtoolkit.cardboard.Distortion distortion;
+
+	public CardboardDistortion(com.google.vrtoolkit.cardboard.Distortion distortion) {
+		this.distortion = distortion;
+	}
+
 	@Override
 	public float distort(float radius) {
-		// TODO Auto-generated method stub
-		return 0;
+		return distortion.distort(radius);
 	}
 
 	@Override
 	public float distortInverse(float radius) {
-		// TODO Auto-generated method stub
-		return 0;
+		return distortion.distortInverse(radius);
 	}
 
 	@Override
 	public float distortionFactor(float radius) {
-		// TODO Auto-generated method stub
-		return 0;
+		return distortion.distortionFactor(radius);
 	}
 
 	@Override
 	public float[] getCoefficients() {
-		// TODO Auto-generated method stub
-		return null;
+		return distortion.getCoefficients();
 	}
 
 	@Override
 	public void setCoefficients(float[] coefficients) {
-		// TODO Auto-generated method stub
-
+		distortion.setCoefficients(coefficients);
 	}
 
 	@Override

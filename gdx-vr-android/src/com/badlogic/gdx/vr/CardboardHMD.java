@@ -36,7 +36,7 @@ public class CardboardHMD implements HeadMountedDisplay {
 
 	@Override
 	public Distortion getDistortion() {
-		return null;
+		return new CardboardDistortion(cardboardDeviceParams.getDistortion());
 	}
 
 	@Override
