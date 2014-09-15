@@ -4,20 +4,34 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="19" />
+    <!-- indicates that the device must be running API Level 16 (Jellybean) or higher. -->
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="19" />
+
+    <!-- You need the permission android.permission.NFC to access Cardboard's NFC tag -->
+    <uses-permission android:name="android.permission.NFC" />
+
+    <!-- indicates that the device must support OpenGL ES 2.0 to run the demo app. -->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/GdxTheme" >
+
+        <!-- indicates that the activity's required screen orientation is "landscape." This is the orientation you must set for VR apps. -->
         <activity
             android:name="com.badlogic.gdx.vr.simpleroom.android.AndroidLauncher"
-            android:label="@string/app_name" 
-            android:screenOrientation="landscape"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
