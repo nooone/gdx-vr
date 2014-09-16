@@ -16,6 +16,7 @@
 
 package com.badlogic.gdx.vr;
 
+import com.google.vrtoolkit.cardboard.Viewport;
 import com.google.vrtoolkit.cardboard.sensors.HeadTracker;
 
 /**
@@ -27,7 +28,7 @@ public class CardboardImplementation implements VirtualRealityImplementation {
 	public void initialize() {
 		// TODO Auto-generated method stub
 		HeadTracker tracker = new HeadTracker(null);
-
+		Viewport vp = new Viewport();
 	}
 
 	@Override

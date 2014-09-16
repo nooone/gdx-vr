@@ -56,8 +56,10 @@ project(":gdx-vr-oculus") {
 }
 
 project(":gdx-vr-android") {
-    apply plugin: 'java'
-    apply from : '../publish.gradle'
+    apply plugin: 'android'
+    //apply from : '../publish.gradle'
+    
+    configurations { natives }
 
 	dependencies {
 		compile project(":gdx-vr")
