@@ -1,5 +1,3 @@
-apply plugin: "java"
-
 sourceCompatibility = 1.7
 
 sourceSets {
@@ -18,10 +16,6 @@ sourceSets {
 			srcDirs = [ "tests/" ]
 		}
 	}
-}
-
-javadoc {
-	title = 'libGDX VR android'
 }
 
 dependencies {
