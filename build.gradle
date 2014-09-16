@@ -61,6 +61,10 @@ project(":gdx-vr-android") {
 
 	dependencies {
 		compile project(":gdx-vr")
+		compile "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
+        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi"
+        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"
+        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"
 		compile fileTree(dir: 'libs', include: 'cardboard.jar')
     }
 }
@@ -93,11 +97,12 @@ project(":gdx-vr-simpleroom-android") {
     dependencies {
         compile project(":gdx-vr-simpleroom-core")
 		compile project(":gdx-vr-android")
+		compile project(":gdx-vr")
         compile "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"
-        compile fileTree(dir: 'libs', include: 'cardboard.jar')
+        //compile fileTree(dir: 'libs', include: 'cardboard.jar')
     }
 }
 
