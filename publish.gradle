@@ -33,10 +33,6 @@ repositories {
     mavenCentral()
 }
 
-task artifactDocs(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from 'build/docs/javadoc'
-}
 
 task artifactSources(type: Jar) {
     from sourceSets.main.allSource
@@ -45,7 +41,6 @@ task artifactSources(type: Jar) {
 
 artifacts {
     archives jar
-    archives artifactDocs
     archives artifactSources
 }
 
