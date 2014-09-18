@@ -27,8 +27,8 @@ public class CardboardImplementation implements VirtualRealityImplementation {
 	@Override
 	public void initialize() {
 		// TODO Auto-generated method stub
-		HeadTracker tracker = new HeadTracker(null);
 		Viewport vp = new Viewport();
+
 	}
 
 	@Override
