@@ -10,14 +10,4 @@ sourceSets {
 			srcDirs = [ "src/" ]
 		}
 	}
-
-	test {
-		java {
-			srcDirs = [ "tests/" ]
-		}
-	}
-}
-
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.+'
 }

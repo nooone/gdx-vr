@@ -12,20 +12,10 @@ sourceSets {
 			srcDirs = [ "src/" ]
 		}
 	}
-
-	test {
-		java {
-			srcDirs = [ "tests/" ]
-		}
-	}
 }
 
 javadoc {
 	title = 'libGDX VR iOS'
-}
-
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.+'
 }
 
 eclipse.project {
