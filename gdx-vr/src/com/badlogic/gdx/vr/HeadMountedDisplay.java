@@ -38,7 +38,7 @@ package com.badlogic.gdx.vr;
 public interface HeadMountedDisplay {
 
 	/**
-	 * Returns the lens distortion model.
+	 * TODO: move to DeviceOpticsInformation? Returns the lens distortion model.
 	 * 
 	 * @return The lens distortion model.
 	 */
@@ -47,6 +47,8 @@ public interface HeadMountedDisplay {
 	DeviceMetaInformation getDisplayMetaInformation();
 
 	DeviceOpticsInformation getDisplayOpticsInformation();
+
+	DeviceScreenInformation getDeviceScreenInformation();
 
 	// /** Returns the NFC tag contents from there these parameters were
 	// extracted. */

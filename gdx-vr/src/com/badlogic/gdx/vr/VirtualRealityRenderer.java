@@ -66,8 +66,8 @@ public class VirtualRealityRenderer {
 		if (VirtualReality.head.isCyclops()) {
 			renderEye(VirtualReality.head.getCyclopsEye(), new Vector3());
 		} else {
-			renderEye(VirtualReality.head.getLeftEye(), new Vector3());
-			renderEye(VirtualReality.head.getRightEye(), new Vector3());
+			renderEye(VirtualReality.head.getLeftEye(), new Vector3(-VirtualReality.head.getInterpupillaryDistance() / 2f, 0, 0));
+			renderEye(VirtualReality.head.getRightEye(), new Vector3(VirtualReality.head.getInterpupillaryDistance() / 2f, 0, 0));
 		}
 
 		for (VirtualRealityRenderListener listener : listeners) {

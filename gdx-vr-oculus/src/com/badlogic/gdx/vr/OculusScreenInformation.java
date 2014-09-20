@@ -16,45 +16,34 @@
 
 package com.badlogic.gdx.vr;
 
-import com.oculusvr.capi.OvrLibrary;
-
 /**
  * @author Daniel Holderbaum
  */
-public class OculusImplementation implements VirtualRealityImplementation {
+public class OculusScreenInformation implements DeviceScreenInformation {
 
-	public OculusImplementation() {
-		VirtualReality.implementation = this;
+	@Override
+	public int getHeight() {
+		return 0;
 	}
 
 	@Override
-	public void initialize() {
-		OvrLibrary.INSTANCE.ovr_Initialize();
-		VirtualReality.headMountedDisplay = new OculusHMD(OvrLibrary.INSTANCE.ovrHmd_CreateDebug(0));
+	public float getHeightMeters() {
+		return 0;
 	}
 
 	@Override
-	public void shutdown() {
-		OvrLibrary.INSTANCE.ovr_Shutdown();
+	public int getWidth() {
+		return 0;
 	}
 
 	@Override
-	public boolean supportsAntiDistortion() {
-		return true;
+	public float getWidthMeters() {
+		return 0;
 	}
 
 	@Override
-	public void addDeviceListener(VirtualRealityDeviceListener listener) {
-	}
-
-	@Override
-	public void removeDeviceListener(VirtualRealityDeviceListener listener) {
-	}
-
-	@Override
-	public void update(float deltaTime) {
-		// TODO Auto-generated method stub
-
+	public float getBorderSizeMeters() {
+		return 0;
 	}
 
 }

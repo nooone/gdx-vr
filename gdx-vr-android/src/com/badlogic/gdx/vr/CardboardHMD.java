@@ -25,13 +25,17 @@ public class CardboardHMD implements HeadMountedDisplay {
 
 	private CardboardDeviceParams cardboardDeviceParams;
 
-	private DeviceMetaInformation displayMetaInformation;
+	private DeviceMetaInformation deviceMetaInformation;
 
-	private DeviceOpticsInformation displayOpticsInformation;
+	private DeviceOpticsInformation deviceOpticsInformation;
+
+	private DeviceScreenInformation deviceScreenInformation;
 
 	public CardboardHMD(CardboardDeviceParams cardboardDeviceParams) {
 		this.cardboardDeviceParams = cardboardDeviceParams;
-		this.displayMetaInformation = new CardboardMetaInformation(cardboardDeviceParams);
+		this.deviceMetaInformation = new CardboardMetaInformation(cardboardDeviceParams);
+		this.deviceOpticsInformation = new CardboardOpticsInformation(cardboardDeviceParams);
+		this.deviceScreenInformation = new CardboardScreenInformation();
 	}
 
 	@Override
@@ -41,12 +45,17 @@ public class CardboardHMD implements HeadMountedDisplay {
 
 	@Override
 	public DeviceMetaInformation getDisplayMetaInformation() {
-		return displayMetaInformation;
+		return deviceMetaInformation;
 	}
 
 	@Override
 	public DeviceOpticsInformation getDisplayOpticsInformation() {
-		return displayOpticsInformation;
+		return deviceOpticsInformation;
+	}
+
+	@Override
+	public DeviceScreenInformation getDeviceScreenInformation() {
+		return deviceScreenInformation;
 	}
 
 }

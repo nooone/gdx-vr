@@ -45,4 +45,9 @@ public class OculusHMD implements HeadMountedDisplay {
 		return null;
 	}
 
+	@Override
+	public DeviceScreenInformation getDeviceScreenInformation() {
+		return null;
+	}
+
 }
