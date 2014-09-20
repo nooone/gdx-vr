@@ -16,34 +16,42 @@
 
 package com.badlogic.gdx.vr;
 
+import com.google.vrtoolkit.cardboard.ScreenParams;
+
 /**
  * @author Daniel Holderbaum
  */
 public class CardboardScreenInformation implements DeviceScreenInformation {
 
+	private ScreenParams screenParams;
+
+	public CardboardScreenInformation(ScreenParams screenParams) {
+		this.screenParams = screenParams;
+	}
+
 	@Override
 	public int getHeight() {
-		return 0;
+		return screenParams.getHeight();
 	}
 
 	@Override
 	public float getHeightMeters() {
-		return 0;
+		return screenParams.getHeightMeters();
 	}
 
 	@Override
 	public int getWidth() {
-		return 0;
+		return screenParams.getWidth();
 	}
 
 	@Override
 	public float getWidthMeters() {
-		return 0;
+		return screenParams.getWidthMeters();
 	}
 
 	@Override
 	public float getBorderSizeMeters() {
-		return 0;
+		return screenParams.getBorderSizeMeters();
 	}
 
 }

@@ -31,11 +31,11 @@ public class CardboardHMD implements HeadMountedDisplay {
 
 	private DeviceScreenInformation deviceScreenInformation;
 
-	public CardboardHMD(CardboardDeviceParams cardboardDeviceParams) {
-		this.cardboardDeviceParams = cardboardDeviceParams;
-		this.deviceMetaInformation = new CardboardMetaInformation(cardboardDeviceParams);
-		this.deviceOpticsInformation = new CardboardOpticsInformation(cardboardDeviceParams);
-		this.deviceScreenInformation = new CardboardScreenInformation();
+	public CardboardHMD(com.google.vrtoolkit.cardboard.HeadMountedDisplay headMountedDisplay) {
+		this.cardboardDeviceParams = headMountedDisplay.getCardboard();
+		this.deviceMetaInformation = new CardboardMetaInformation(headMountedDisplay.getCardboard());
+		this.deviceOpticsInformation = new CardboardOpticsInformation(headMountedDisplay.getCardboard());
+		this.deviceScreenInformation = new CardboardScreenInformation(headMountedDisplay.getScreen());
 	}
 
 	@Override
