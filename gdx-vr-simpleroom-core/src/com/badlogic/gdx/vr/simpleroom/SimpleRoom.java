@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.g3d.utils.ShaderProvider;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.vr.VirtualReality;
 import com.badlogic.gdx.vr.VirtualRealityRenderListener;
 
 public class SimpleRoom extends ApplicationAdapter implements VirtualRealityRenderListener {
@@ -64,6 +65,10 @@ public class SimpleRoom extends ApplicationAdapter implements VirtualRealityRend
 		environment = new Environment();
 		environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
 		environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
+
+		VirtualReality.initialize();
+		VirtualReality.renderer.listeners.add(this);
+		VirtualReality.head.setCyclops(true);
 	}
 
 	@Override
@@ -74,11 +79,8 @@ public class SimpleRoom extends ApplicationAdapter implements VirtualRealityRend
 		cameraController.update();
 		camera.update(true);
 
-		// VirtualReality.renderer.
-		modelBatch.begin(camera);
-		modelBatch.render(ground, environment);
-		modelBatch.render(modelInstance, environment);
-		modelBatch.end();
+		VirtualReality.update(Gdx.graphics.getDeltaTime());
+		VirtualReality.renderer.render();
 
 	}
 
@@ -103,5 +105,10 @@ public class SimpleRoom extends ApplicationAdapter implements VirtualRealityRend
 		modelBatch.render(ground, environment);
 		modelBatch.render(modelInstance, environment);
 		modelBatch.end();
+	}
+
+	@Override
+	public void dispose() {
+		VirtualReality.shutdown();
 	}
 }

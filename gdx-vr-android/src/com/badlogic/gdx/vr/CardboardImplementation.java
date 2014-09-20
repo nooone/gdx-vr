@@ -18,6 +18,7 @@ package com.badlogic.gdx.vr;
 
 import android.content.Context;
 
+import com.badlogic.gdx.math.Matrix4;
 import com.google.vrtoolkit.cardboard.sensors.HeadTracker;
 
 /**
@@ -31,6 +32,7 @@ public class CardboardImplementation implements VirtualRealityImplementation {
 
 	public CardboardImplementation(Context context) {
 		this.context = context;
+		VirtualReality.implementation = this;
 	}
 
 	@Override
@@ -47,8 +49,7 @@ public class CardboardImplementation implements VirtualRealityImplementation {
 
 	@Override
 	public boolean supportsAntiDistortion() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -63,4 +64,13 @@ public class CardboardImplementation implements VirtualRealityImplementation {
 
 	}
 
+	private static final Matrix4 HEAD_ROTATION = new Matrix4();
+
+	@Override
+	public void update(float deltaTime) {
+		int writeOffset = 0;
+		// we need to supply a 4x4, column major matrix
+		headTracker.getLastHeadView(HEAD_ROTATION.getValues(), writeOffset);
+		HEAD_ROTATION.getRotation(VirtualReality.head.getOrientation(), true);
+	}
 }

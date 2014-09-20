@@ -16,8 +16,10 @@
 
 package com.badlogic.gdx.vr;
 
+import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class Head {
@@ -42,15 +44,46 @@ public class Head {
 	 */
 	private float eyeHeight = 1.61f;
 
-	private Vector3 position;
+	private Vector3 position = new Vector3();
 
-	private Quaternion orientation;
+	private Quaternion orientation = new Quaternion();
 
-	private Viewport leftEye;
+	private Viewport leftEye = new ScreenViewport(new PerspectiveCamera());
 
-	private Viewport rightEye;
+	private Viewport rightEye = new ScreenViewport(new PerspectiveCamera());
 
-	private Viewport cyclopsEye;
+	private Viewport cyclopsEye = new ScreenViewport(new PerspectiveCamera());
+
+	private boolean cyclops;
+
+	public Viewport getCyclopsEye() {
+		return cyclopsEye;
+	}
+
+	public void setCyclopsEye(Viewport cyclopsEye) {
+		this.cyclopsEye = cyclopsEye;
+	}
+
+	public boolean isCyclops() {
+		return cyclops;
+	}
+
+	/**
+	 * Enables or disables VR rendering mode.
+	 * 
+	 * Controls stereo rendering and distortion correction. Enabled by default.
+	 * Changes will be effective from the first frame after this call.
+	 * 
+	 * If disabled, no interpupillary distance will be applied to the eye
+	 * transformations and automatic distortion correction will not take place.
+	 * Changes will be applied to the next frames being drawn.
+	 * 
+	 * See the documentation of the Renderer and StereoRenderer interfaces for
+	 * details on how they are affected by VR mode.
+	 */
+	public void setCyclops(boolean cyclops) {
+		this.cyclops = cyclops;
+	}
 
 	public float getInterpupillaryDistance() {
 		return interpupillaryDistance;

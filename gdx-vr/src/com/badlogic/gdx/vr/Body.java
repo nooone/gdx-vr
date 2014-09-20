@@ -24,9 +24,9 @@ import com.badlogic.gdx.math.Vector3;
  */
 public class Body {
 
-	public Vector3 position;
+	public Vector3 position = new Vector3();
 
-	public Quaternion rotation;
+	public Quaternion rotation = new Quaternion();
 
 	public final Vector3 headOffset = new Vector3(0f, 1.61f / 2f, 0f);
 

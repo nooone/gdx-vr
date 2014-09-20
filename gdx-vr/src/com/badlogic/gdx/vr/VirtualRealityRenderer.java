@@ -17,8 +17,11 @@
 package com.badlogic.gdx.vr;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.math.Quaternion;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -27,34 +30,13 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  */
 public class VirtualRealityRenderer {
 
-	public Array<VirtualRealityRenderListener> listeners;
+	public Array<VirtualRealityRenderListener> listeners = new Array<VirtualRealityRenderListener>();
 
-	private boolean vrMode, distortionCorrected;
+	private boolean distortionCorrected;
 
 	private FrameBuffer leftFBO, rightFBO;
 
-	/**
-	 * TODO: rename to cyclops-mode.
-	 * 
-	 * Enables or disables VR rendering mode.
-	 * 
-	 * Controls stereo rendering and distortion correction. Enabled by default.
-	 * Changes will be effective from the first frame after this call.
-	 * 
-	 * If disabled, no interpupillary distance will be applied to the eye
-	 * transformations and automatic distortion correction will not take place.
-	 * Changes will be applied to the next frames being drawn.
-	 * 
-	 * See the documentation of the Renderer and StereoRenderer interfaces for
-	 * details on how they are affected by VR mode.
-	 */
-	public void setVRMode(boolean enabled) {
-		this.vrMode = enabled;
-
-		// if (vrMode)
-	}
-
-	private void disposeFBOs() {
+	public void dispose() {
 		if (leftFBO != null) {
 			leftFBO.dispose();
 			leftFBO = null;
@@ -81,12 +63,12 @@ public class VirtualRealityRenderer {
 			listener.frameStarted();
 		}
 
-		// if (cyclops) {
-		//
-		// } else {
-		renderEye(VirtualReality.head.getLeftEye());
-		renderEye(VirtualReality.head.getRightEye());
-		// }
+		if (VirtualReality.head.isCyclops()) {
+			renderEye(VirtualReality.head.getCyclopsEye(), new Vector3());
+		} else {
+			renderEye(VirtualReality.head.getLeftEye(), new Vector3());
+			renderEye(VirtualReality.head.getRightEye(), new Vector3());
+		}
 
 		for (VirtualRealityRenderListener listener : listeners) {
 			listener.frameEnded();
@@ -99,13 +81,37 @@ public class VirtualRealityRenderer {
 		FrameBuffer fbo = new FrameBuffer(Format.RGBA4444, screenWidth, screenHeight, false);
 	}
 
-	private void renderEye(Viewport eye) {
+	private void renderEye(Viewport eye, Vector3 eyeOffset) {
 		int screenWidth = Gdx.graphics.getWidth();
 		int screenHeight = Gdx.graphics.getHeight();
 		eye.update(screenWidth, screenHeight);
 
+		Camera camera = eye.getCamera();
+
+		Vector3 eyePosition = camera.position;
+		eyePosition.set(VirtualReality.body.position);
+		eyePosition.add(VirtualReality.body.headOffset);
+
+		Quaternion eyeOrientation = new Quaternion();
+		eyeOrientation.set(VirtualReality.head.getOrientation());
+		eyeOrientation.mul(VirtualReality.body.rotation);
+
+		eyeOffset.mul(eyeOrientation);
+		eyePosition.add(eyeOffset);
+
+		Vector3 eyeDirection = new Vector3(0, 0, -1);
+		eyeDirection.mul(eyeOrientation);
+		Vector3 eyeUp = new Vector3(0, 1, 0);
+		eyeUp.mul(eyeOrientation);
+
+		camera.position.set(eyePosition);
+		camera.direction.set(eyeDirection);
+		camera.up.set(eyeUp);
+
+		camera.update(true);
+
 		for (VirtualRealityRenderListener listener : listeners) {
-			listener.render(eye.getCamera());
+			listener.render(camera);
 		}
 	}
 }

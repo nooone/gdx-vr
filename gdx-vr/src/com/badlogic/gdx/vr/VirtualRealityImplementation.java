@@ -25,6 +25,8 @@ public interface VirtualRealityImplementation {
 
 	void shutdown();
 
+	void update(float deltaTime);
+
 	boolean supportsAntiDistortion();
 
 	void addDeviceListener(VirtualRealityDeviceListener listener);

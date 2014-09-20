@@ -45,4 +45,8 @@ public class VirtualReality {
 		renderer = null;
 	}
 
+	public static void update(float deltaTime) {
+		implementation.update(deltaTime);
+	}
+
 }
