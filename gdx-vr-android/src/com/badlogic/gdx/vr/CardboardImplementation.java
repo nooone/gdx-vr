@@ -21,6 +21,7 @@ import android.app.Activity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.LifecycleListener;
 import com.badlogic.gdx.math.Matrix4;
+import com.google.vrtoolkit.cardboard.DistortionRenderer;
 import com.google.vrtoolkit.cardboard.HeadMountedDisplay;
 import com.google.vrtoolkit.cardboard.sensors.HeadTracker;
 
@@ -41,7 +42,10 @@ public class CardboardImplementation implements VirtualRealityImplementation {
 		headTracker = new HeadTracker(activity);
 		headTracker.startTracking();
 
-		VirtualReality.headMountedDisplay = new CardboardHMD(new HeadMountedDisplay(activity.getWindowManager().getDefaultDisplay()));
+		HeadMountedDisplay hmd = new HeadMountedDisplay(activity.getWindowManager().getDefaultDisplay());
+		VirtualReality.headMountedDisplay = new CardboardHMD(hmd);
+
+		VirtualReality.distortionRenderer = new CardboardDistortionRenderer(hmd, new DistortionRenderer());
 
 		Gdx.app.addLifecycleListener(new LifecycleListener() {
 			@Override

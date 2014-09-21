@@ -71,6 +71,8 @@ public class VirtualRealityRenderer {
 	}
 
 	public void render() {
+		VirtualReality.distortionRenderer.frameStarted();
+		VirtualReality.distortionRenderer.projectionChanged(VirtualReality.head.getLeftEye(), VirtualReality.head.getRightEye());
 		for (VirtualRealityRenderListener listener : listeners) {
 			listener.frameStarted();
 		}
@@ -91,6 +93,7 @@ public class VirtualRealityRenderer {
 		for (VirtualRealityRenderListener listener : listeners) {
 			listener.frameEnded();
 		}
+		VirtualReality.distortionRenderer.frameEnded();
 	}
 
 	public void resize(int screenWidth, int screenHeight) {

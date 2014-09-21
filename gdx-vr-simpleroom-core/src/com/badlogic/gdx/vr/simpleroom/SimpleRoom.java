@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.g3d.utils.ShaderProvider;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.vr.Stage3D;
 import com.badlogic.gdx.vr.VirtualReality;
 import com.badlogic.gdx.vr.VirtualRealityRenderListener;
 
@@ -32,6 +33,7 @@ public class SimpleRoom extends ApplicationAdapter implements VirtualRealityRend
 	private ModelInstance ground;
 	private AssetManager assets;
 	private Environment environment;
+	private Stage3D stage;
 
 	@Override
 	public void create() {

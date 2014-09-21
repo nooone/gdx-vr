@@ -24,13 +24,21 @@ import com.badlogic.gdx.graphics.Camera;
 public interface VirtualRealityRenderListener {
 
 	/**
-	 * Should be implemented to clear the screen for example.
+	 * This is called before any rendering is triggered. It can be implemented
+	 * to clear the screen before each frame for example.
 	 */
 	void frameStarted();
 
+	/**
+	 * This is called after the rendering of all eyes is finished.
+	 */
 	void frameEnded();
 
-	/** Called once or twice, depending on the settings of the renderer. */
+	/**
+	 * TODO: make this viewport, not camera.
+	 * 
+	 * Called once or twice, depending on the settings of the renderer.
+	 */
 	void render(Camera camera);
 
 }

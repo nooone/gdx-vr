@@ -16,30 +16,17 @@
 
 package com.badlogic.gdx.vr;
 
-import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 /**
- * This class is similar to {@link Gdx}.
- * 
  * @author Daniel Holderbaum
  */
-public class VirtualReality {
+public interface DistortionRenderer {
 
-	public static HeadMountedDisplay headMountedDisplay;
+	void frameStarted();
 
-	public static Head head;
+	void frameEnded();
 
-	public static Body body;
-
-	public static VirtualRealityRenderer renderer;
-
-	static VirtualRealityImplementation implementation;
-
-	static DistortionRenderer distortionRenderer;
-
-	// TODO: remove from here and javadoc
-	public static void update(float deltaTime) {
-		implementation.update(deltaTime);
-	}
+	void projectionChanged(Viewport leftEye, Viewport rightEye);
 
 }
