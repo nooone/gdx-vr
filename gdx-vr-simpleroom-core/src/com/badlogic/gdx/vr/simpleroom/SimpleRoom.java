@@ -66,7 +66,6 @@ public class SimpleRoom extends ApplicationAdapter implements VirtualRealityRend
 		environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
 		environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
 
-		VirtualReality.initialize();
 		VirtualReality.renderer.listeners.add(this);
 		VirtualReality.head.setCyclops(true);
 	}
@@ -109,6 +108,5 @@ public class SimpleRoom extends ApplicationAdapter implements VirtualRealityRend
 
 	@Override
 	public void dispose() {
-		VirtualReality.shutdown();
 	}
 }

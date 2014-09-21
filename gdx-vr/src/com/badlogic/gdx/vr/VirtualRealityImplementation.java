@@ -21,9 +21,9 @@ package com.badlogic.gdx.vr;
  */
 public interface VirtualRealityImplementation {
 
-	void initialize();
+	// void initialize();
 
-	void shutdown();
+	// void dispose();
 
 	void update(float deltaTime);
 

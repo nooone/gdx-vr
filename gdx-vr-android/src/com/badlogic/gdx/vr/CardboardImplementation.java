@@ -16,9 +16,12 @@
 
 package com.badlogic.gdx.vr;
 
-import android.content.Context;
+import android.app.Activity;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.LifecycleListener;
 import com.badlogic.gdx.math.Matrix4;
+import com.google.vrtoolkit.cardboard.HeadMountedDisplay;
 import com.google.vrtoolkit.cardboard.sensors.HeadTracker;
 
 /**
@@ -26,25 +29,37 @@ import com.google.vrtoolkit.cardboard.sensors.HeadTracker;
  */
 public class CardboardImplementation implements VirtualRealityImplementation {
 
-	private Context context;
+	// private Context context;
 
 	private HeadTracker headTracker;
 
-	public CardboardImplementation(Context context) {
-		this.context = context;
+	public CardboardImplementation(Activity activity) {
+		// this.context = context;
 		VirtualReality.implementation = this;
-	}
 
-	@Override
-	public void initialize() {
-		headTracker = new HeadTracker(context);
+		VirtualReality.head = new Head();
+		VirtualReality.body = new Body();
+		VirtualReality.renderer = new VirtualRealityRenderer();
+
+		headTracker = new HeadTracker(activity);
 		headTracker.startTracking();
-	}
 
-	@Override
-	public void shutdown() {
-		headTracker.stopTracking();
-		headTracker = null;
+		VirtualReality.headMountedDisplay = new CardboardHMD(new HeadMountedDisplay(activity.getWindowManager().getDefaultDisplay()));
+
+		Gdx.app.addLifecycleListener(new LifecycleListener() {
+			@Override
+			public void resume() {
+			}
+
+			@Override
+			public void pause() {
+			}
+
+			@Override
+			public void dispose() {
+				headTracker.stopTracking();
+			}
+		});
 	}
 
 	@Override

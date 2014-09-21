@@ -16,6 +16,8 @@
 
 package com.badlogic.gdx.vr;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.LifecycleListener;
 import com.oculusvr.capi.OvrLibrary;
 
 /**
@@ -25,17 +27,28 @@ public class OculusImplementation implements VirtualRealityImplementation {
 
 	public OculusImplementation() {
 		VirtualReality.implementation = this;
-	}
 
-	@Override
-	public void initialize() {
+		VirtualReality.head = new Head();
+		VirtualReality.body = new Body();
+		VirtualReality.renderer = new VirtualRealityRenderer();
+
 		OvrLibrary.INSTANCE.ovr_Initialize();
 		VirtualReality.headMountedDisplay = new OculusHMD(OvrLibrary.INSTANCE.ovrHmd_CreateDebug(0));
-	}
 
-	@Override
-	public void shutdown() {
-		OvrLibrary.INSTANCE.ovr_Shutdown();
+		Gdx.app.addLifecycleListener(new LifecycleListener() {
+			@Override
+			public void resume() {
+			}
+
+			@Override
+			public void pause() {
+			}
+
+			@Override
+			public void dispose() {
+				OvrLibrary.INSTANCE.ovr_Shutdown();
+			}
+		});
 	}
 
 	@Override
@@ -51,10 +64,11 @@ public class OculusImplementation implements VirtualRealityImplementation {
 	public void removeDeviceListener(VirtualRealityDeviceListener listener) {
 	}
 
+	/**
+	 * TODO: move this somewhere else
+	 */
 	@Override
 	public void update(float deltaTime) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

@@ -8,7 +8,7 @@ import com.badlogic.gdx.vr.simpleroom.SimpleRoom;
 public class DesktopLauncher {
 	public static void main(String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new OculusImplementation();
 		new LwjglApplication(new SimpleRoom(), config);
+		new OculusImplementation();
 	}
 }
