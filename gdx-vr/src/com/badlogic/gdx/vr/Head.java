@@ -22,36 +22,23 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+/**
+ * 
+ * @author Daniel Holderbaum
+ */
 public class Head {
 
-	/**
-	 * In meters. In reality it can range from 54mm to 72mm with 64mm being the
-	 * average (thus the default value).
-	 * 
-	 * Sets the interpupillary distance to use.
-	 * 
-	 * The provided distance will be used to compute the matrix returned by
-	 * EyeTransform.getEyeView(). Changes will be effective from the first frame
-	 * after this call.
-	 */
 	private float interpupillaryDistance = 0.064f;
-
-	/**
-	 * In meters. The average eye-height of a human being is about 1.61m (thus
-	 * the default value). If one wants to model a realistic environment and
-	 * uses real-world scales, this has to be adjusted to fit the player.
-	 * Otherwise he will feel smaller or bigger in-game, compared to real life.
-	 */
 	private float eyeHeight = 1.61f;
 
 	private Vector3 position = new Vector3();
-
 	private Quaternion orientation = new Quaternion();
 
+	private Vector3 positionOrigin = new Vector3();
+	private Quaternion orientationOrigin = new Quaternion();
+
 	private Viewport leftEye = new ScreenViewport(new PerspectiveCamera());
-
 	private Viewport rightEye = new ScreenViewport(new PerspectiveCamera());
-
 	private Viewport cyclopsEye = new ScreenViewport(new PerspectiveCamera());
 
 	private boolean cyclops;
@@ -80,22 +67,68 @@ public class Head {
 		this.cyclops = cyclops;
 	}
 
+	/**
+	 * Gets the interpupillary distance (in meters). By default it is 64mm (
+	 * {@code 0.064f}).
+	 * 
+	 * @return The interpupillary distance in meters.
+	 */
 	public float getInterpupillaryDistance() {
 		return interpupillaryDistance;
 	}
 
+	/**
+	 * Sets the interpupillary distance to use (in meters). Each eye's position
+	 * is offset by half of this value.
+	 * 
+	 * In reality it can range from 54mm to 72mm with 64mm being the average
+	 * (thus the default value).
+	 * 
+	 * The provided distance will be used to compute the matrix returned by
+	 * EyeTransform.getEyeView(). Changes will be effective from the first frame
+	 * after this call.
+	 * 
+	 * @param interpupillaryDistance
+	 *            The interpupillary distance (in meters).
+	 */
 	public void setInterpupillaryDistance(float interpupillaryDistance) {
 		this.interpupillaryDistance = interpupillaryDistance;
 	}
 
+	/**
+	 * Gets the eye height in meters. By default it is {@code 1.61f}. The head
+	 * is offset by half of this value from the {@link Body#position}.
+	 * 
+	 * @return The eye height in meters.
+	 */
 	public float getEyeHeight() {
 		return eyeHeight;
 	}
 
+	/**
+	 * Sets the eye height in meters. The head is offset by half of this value
+	 * from the {@link Body#position}.
+	 * 
+	 * The average eye-height of a human being is about 1.61m (thus the default
+	 * value). If one wants to model a realistic environment and uses real-world
+	 * scales, this has to be adjusted to fit the player. Otherwise he will feel
+	 * smaller or bigger in-game, compared to real life.
+	 * 
+	 * @param eyeHeight
+	 *            The eye height to be used (in meters).
+	 */
 	public void setEyeHeight(float eyeHeight) {
 		this.eyeHeight = eyeHeight;
 	}
 
+	/**
+	 * Returns the position of the head. It is the offset of the position from
+	 * the last time {@link #resetHeadPose()} has been called. It should not be
+	 * changed, because it is automatically set via head tracking of the head
+	 * mounted display.
+	 * 
+	 * @return The position of the head.
+	 */
 	public Vector3 getPosition() {
 		return position;
 	}
@@ -120,8 +153,12 @@ public class Head {
 		this.rightEye = rightEye;
 	}
 
+	/**
+	 * The current position and orientation will be used
+	 */
 	public void resetHeadPose() {
-
+		positionOrigin.set(position);
+		orientationOrigin.set(orientation);
 	}
 
 }

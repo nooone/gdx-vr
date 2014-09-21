@@ -20,14 +20,17 @@ import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 
 /**
+ * The position and orientation of the {@link Head}, which are automatically
+ * tracked via the head mounted display are bound to the bodies position and
+ * orientation. Thus, the position and orientation of a player should be
+ * controlled via a {@link Body}.
+ * 
  * @author Daniel Holderbaum
  */
 public class Body {
 
-	public Vector3 position = new Vector3();
+	public final Vector3 position = new Vector3();
 
-	public Quaternion orientation = new Quaternion();
-
-	public final Vector3 headOffset = new Vector3(0f, 1.61f / 2f, 0f);
+	public final Quaternion orientation = new Quaternion();
 
 }

@@ -104,7 +104,10 @@ public class VirtualRealityRenderer {
 
 		Vector3 eyePosition = camera.position;
 		eyePosition.set(VirtualReality.body.position);
-		eyePosition.add(VirtualReality.body.headOffset);
+
+		Vector3 headOffset = new Vector3(0, VirtualReality.head.getEyeHeight() / 2f, 0);
+		headOffset.mul(VirtualReality.body.orientation);
+		eyePosition.add(headOffset);
 
 		Quaternion eyeOrientation = new Quaternion();
 		eyeOrientation.set(VirtualReality.head.getOrientation());
