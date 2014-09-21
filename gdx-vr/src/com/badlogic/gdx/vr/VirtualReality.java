@@ -35,6 +35,7 @@ public class VirtualReality {
 
 	static VirtualRealityImplementation implementation;
 
+	// TODO: remove from here and javadoc
 	public static void update(float deltaTime) {
 		implementation.update(deltaTime);
 	}

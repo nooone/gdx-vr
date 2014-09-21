@@ -29,12 +29,9 @@ import com.google.vrtoolkit.cardboard.sensors.HeadTracker;
  */
 public class CardboardImplementation implements VirtualRealityImplementation {
 
-	// private Context context;
-
 	private HeadTracker headTracker;
 
 	public CardboardImplementation(Activity activity) {
-		// this.context = context;
 		VirtualReality.implementation = this;
 
 		VirtualReality.head = new Head();
