@@ -206,7 +206,7 @@ public class SplitViewport extends Viewport {
 
 		// now shift it to the correct place
 		viewport.setScreenX((int) (viewport.getScreenX() + subViewportArea.x));
-		viewport.setScreenY((int) (viewport.getScreenX() + subViewportArea.y));
+		viewport.setScreenY((int) (viewport.getScreenY() + subViewportArea.y));
 
 		// we changed the viewport parameters, now we need to update once more
 		// to correct the glViewport

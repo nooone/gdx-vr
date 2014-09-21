@@ -23,7 +23,11 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.vr.SplitViewport.SizeInformation;
+import com.badlogic.gdx.vr.SplitViewport.SizeType;
+import com.badlogic.gdx.vr.SplitViewport.SubView;
 
 /**
  * @author Daniel Holderbaum
@@ -35,6 +39,14 @@ public class VirtualRealityRenderer {
 	private boolean distortionCorrected;
 
 	private FrameBuffer leftFBO, rightFBO;
+
+	private SplitViewport splitViewport = new SplitViewport(new ScreenViewport());
+
+	public VirtualRealityRenderer() {
+		splitViewport.row(new SizeInformation(SizeType.RELATIVE, 1f));
+		splitViewport.add(new SubView(new SizeInformation(SizeType.RELATIVE, 0.5f), VirtualReality.head.getLeftEye()));
+		splitViewport.add(new SubView(new SizeInformation(SizeType.RELATIVE, 0.5f), VirtualReality.head.getRightEye()));
+	}
 
 	public void dispose() {
 		if (leftFBO != null) {
@@ -63,10 +75,16 @@ public class VirtualRealityRenderer {
 			listener.frameStarted();
 		}
 
+		int screenWidth = Gdx.graphics.getWidth();
+		int screenHeight = Gdx.graphics.getHeight();
 		if (VirtualReality.head.isCyclops()) {
+			VirtualReality.head.getCyclopsEye().update(screenWidth, screenHeight);
 			renderEye(VirtualReality.head.getCyclopsEye(), new Vector3());
 		} else {
+			splitViewport.update(screenWidth, screenHeight);
+			splitViewport.activateSubViewport(0, 0, false);
 			renderEye(VirtualReality.head.getLeftEye(), new Vector3(-VirtualReality.head.getInterpupillaryDistance() / 2f, 0, 0));
+			splitViewport.activateSubViewport(0, 1, false);
 			renderEye(VirtualReality.head.getRightEye(), new Vector3(VirtualReality.head.getInterpupillaryDistance() / 2f, 0, 0));
 		}
 
@@ -82,10 +100,6 @@ public class VirtualRealityRenderer {
 	}
 
 	private void renderEye(Viewport eye, Vector3 eyeOffset) {
-		int screenWidth = Gdx.graphics.getWidth();
-		int screenHeight = Gdx.graphics.getHeight();
-		eye.update(screenWidth, screenHeight);
-
 		Camera camera = eye.getCamera();
 
 		Vector3 eyePosition = camera.position;
@@ -94,7 +108,7 @@ public class VirtualRealityRenderer {
 
 		Quaternion eyeOrientation = new Quaternion();
 		eyeOrientation.set(VirtualReality.head.getOrientation());
-		eyeOrientation.mul(VirtualReality.body.rotation);
+		eyeOrientation.mul(VirtualReality.body.orientation);
 
 		eyeOffset.mul(eyeOrientation);
 		eyePosition.add(eyeOffset);

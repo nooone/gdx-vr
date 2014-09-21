@@ -2,6 +2,7 @@ package com.badlogic.gdx.vr.simpleroom;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
@@ -21,6 +22,8 @@ import com.badlogic.gdx.graphics.g3d.utils.DefaultShaderProvider;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ShaderProvider;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Quaternion;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.vr.VirtualReality;
@@ -67,7 +70,7 @@ public class SimpleRoom extends ApplicationAdapter implements VirtualRealityRend
 		environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
 
 		VirtualReality.renderer.listeners.add(this);
-		VirtualReality.head.setCyclops(true);
+		// VirtualReality.head.setCyclops(true);
 	}
 
 	@Override
@@ -81,6 +84,18 @@ public class SimpleRoom extends ApplicationAdapter implements VirtualRealityRend
 		VirtualReality.update(Gdx.graphics.getDeltaTime());
 		VirtualReality.renderer.render();
 
+		if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+			VirtualReality.body.position.add(new Vector3(0, 0, -1).mul(VirtualReality.body.orientation));
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+			VirtualReality.body.position.add(new Vector3(0, 0, 1).mul(VirtualReality.body.orientation));
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+			VirtualReality.body.orientation.mulLeft(new Quaternion(Vector3.Y, 1f));
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+			VirtualReality.body.orientation.mulLeft(new Quaternion(Vector3.Y, -1f));
+		}
 	}
 
 	@Override
