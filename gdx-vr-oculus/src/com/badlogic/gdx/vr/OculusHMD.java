@@ -25,29 +25,37 @@ public class OculusHMD implements HeadMountedDisplay {
 
 	private Hmd hmd;
 
+	private DeviceMetaInformation deviceMetaInformation;
+
+	private DeviceOpticsInformation deviceOpticsInformation;
+
+	private DeviceScreenInformation deviceScreenInformation;
+
 	public OculusHMD(Hmd hmd) {
 		this.hmd = hmd;
+		this.deviceMetaInformation = new OculusMetaInformation(hmd);
+		this.deviceOpticsInformation = new OculusOpticsInformation(hmd);
+		this.deviceScreenInformation = new OculusScreenInformation(hmd);
 	}
 
 	@Override
-	public DeviceMetaInformation getDisplayMetaInformation() {
-		return null;
+	public DeviceMetaInformation getDeviceMetaInformation() {
+		return deviceMetaInformation;
 	}
 
 	@Override
-	public DeviceOpticsInformation getDisplayOpticsInformation() {
-		return null;
+	public DeviceOpticsInformation getDeviceOpticsInformation() {
+		return deviceOpticsInformation;
 	}
 
 	@Override
 	public Distortion getDistortion() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public DeviceScreenInformation getDeviceScreenInformation() {
-		return null;
+		return deviceScreenInformation;
 	}
 
 }

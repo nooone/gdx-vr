@@ -16,42 +16,29 @@
 
 package com.badlogic.gdx.vr;
 
-import com.oculusvr.capi.Hmd;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 /**
  * @author Daniel Holderbaum
  */
-public class OculusScreenInformation implements DeviceScreenInformation {
+public class OculusDistortionRenderer implements DistortionRenderer {
 
-	private Hmd hmd;
+	@Override
+	public void frameStarted() {
+		// TODO Auto-generated method stub
 
-	public OculusScreenInformation(Hmd hmd) {
-		this.hmd = hmd;
 	}
 
 	@Override
-	public int getHeight() {
-		return hmd.Resolution.h;
+	public void frameEnded() {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
-	public float getHeightMeters() {
-		return 0;
-	}
+	public void projectionChanged(Viewport leftEye, Viewport rightEye) {
+		// TODO Auto-generated method stub
 
-	@Override
-	public int getWidth() {
-		return hmd.Resolution.w;
-	}
-
-	@Override
-	public float getWidthMeters() {
-		return 0;
-	}
-
-	@Override
-	public float getBorderSizeMeters() {
-		return 0;
 	}
 
 }

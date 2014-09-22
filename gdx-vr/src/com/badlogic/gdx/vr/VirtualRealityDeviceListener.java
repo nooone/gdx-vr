@@ -18,8 +18,14 @@ package com.badlogic.gdx.vr;
 
 public interface VirtualRealityDeviceListener {
 
+	/**
+	 * TODO: add HeadMountedDisplay as parameter?
+	 */
 	void deviceConnected();
 
+	/**
+	 * TODO: add HeadMountedDisplay as parameter?
+	 */
 	void deviceDisconnected();
 
 }

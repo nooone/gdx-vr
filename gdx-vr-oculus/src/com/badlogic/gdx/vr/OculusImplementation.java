@@ -18,12 +18,15 @@ package com.badlogic.gdx.vr;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.LifecycleListener;
+import com.oculusvr.capi.Hmd;
 import com.oculusvr.capi.OvrLibrary;
 
 /**
  * @author Daniel Holderbaum
  */
 public class OculusImplementation implements VirtualRealityImplementation {
+
+	private Hmd hmd;
 
 	public OculusImplementation() {
 		VirtualReality.implementation = this;
@@ -33,7 +36,8 @@ public class OculusImplementation implements VirtualRealityImplementation {
 		VirtualReality.renderer = new VirtualRealityRenderer();
 
 		OvrLibrary.INSTANCE.ovr_Initialize();
-		VirtualReality.headMountedDisplay = new OculusHMD(OvrLibrary.INSTANCE.ovrHmd_CreateDebug(0));
+		hmd = OvrLibrary.INSTANCE.ovrHmd_CreateDebug(0);
+		VirtualReality.headMountedDisplay = new OculusHMD(hmd);
 
 		Gdx.app.addLifecycleListener(new LifecycleListener() {
 			@Override
@@ -69,6 +73,11 @@ public class OculusImplementation implements VirtualRealityImplementation {
 	 */
 	@Override
 	public void update(float deltaTime) {
+		// TODO: can each eye have a different orientation here?
+		TypeTransformer.transform(hmd.getEyePose(0).Orientation, VirtualReality.head.getOrientation());
+		TypeTransformer.transform(hmd.getEyePose(1).Orientation, VirtualReality.head.getOrientation());
+		TypeTransformer.transform(hmd.getEyePose(0).Position, VirtualReality.head.getPosition());
+		TypeTransformer.transform(hmd.getEyePose(1).Position, VirtualReality.head.getPosition());
 	}
 
 }

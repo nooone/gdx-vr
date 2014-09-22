@@ -43,12 +43,29 @@ public abstract class TypeTransformer {
 		return new Quaternion(x, y, z, w);
 	}
 
+	public static void transform(OvrQuaternionf sourceQuaternion, Quaternion quaternion) {
+		float x = sourceQuaternion.x;
+		float y = sourceQuaternion.y;
+		float z = sourceQuaternion.z;
+		float w = sourceQuaternion.w;
+
+		quaternion.set(x, y, z, w);
+	}
+
 	public static Vector3 transform(OvrVector3f sourceVector) {
 		float x = sourceVector.x;
 		float y = sourceVector.y;
 		float z = sourceVector.z;
 
 		return new Vector3(x, y, z);
+	}
+
+	public static void transform(OvrVector3f sourceVector, Vector3 vector) {
+		float x = sourceVector.x;
+		float y = sourceVector.y;
+		float z = sourceVector.z;
+
+		vector.set(x, y, z);
 	}
 
 	public static Vector2 transform(OvrVector2i sourceVector) {

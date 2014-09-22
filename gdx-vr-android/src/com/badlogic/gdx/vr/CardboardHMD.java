@@ -44,12 +44,12 @@ public class CardboardHMD implements HeadMountedDisplay {
 	}
 
 	@Override
-	public DeviceMetaInformation getDisplayMetaInformation() {
+	public DeviceMetaInformation getDeviceMetaInformation() {
 		return deviceMetaInformation;
 	}
 
 	@Override
-	public DeviceOpticsInformation getDisplayOpticsInformation() {
+	public DeviceOpticsInformation getDeviceOpticsInformation() {
 		return deviceOpticsInformation;
 	}
 

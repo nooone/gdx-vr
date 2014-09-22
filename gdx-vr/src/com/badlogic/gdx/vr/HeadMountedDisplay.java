@@ -44,9 +44,9 @@ public interface HeadMountedDisplay {
 	 */
 	Distortion getDistortion();
 
-	DeviceMetaInformation getDisplayMetaInformation();
+	DeviceMetaInformation getDeviceMetaInformation();
 
-	DeviceOpticsInformation getDisplayOpticsInformation();
+	DeviceOpticsInformation getDeviceOpticsInformation();
 
 	DeviceScreenInformation getDeviceScreenInformation();
 
